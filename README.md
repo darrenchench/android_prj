@@ -1,2 +1,2 @@
 # android_prj
-code bits of my android projects 
+only code bits of my android projects,and directory,no source code of other co-workers 

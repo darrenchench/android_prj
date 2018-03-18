@@ -1,0 +1,100 @@
+-apply plugin: 'com.android.application'
+-//greendao ??start
+-apply plugin: 'org.greenrobot.greendao'
+-buildscript {
+-    repositories {
+-        mavenCentral()
+-    }
+-    dependencies {
+-        //classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+-    }
+-}
+-repositories {
+-    flatDir {
+-        dirs 'src/main/PREBUILD'
+-    }
+-}
+-greendao {
+-    schemaVersion 1
+-    daoPackage 'com.zhongzhichuangshi.mengliao.greendao'
+-    targetGenDir 'src/main/java'
+-}
+-//greendao ??end
+-android {
+-    compileSdkVersion 24
+-    buildToolsVersion '27.0.1'
+-    defaultConfig {
+-        applicationId "com.zhongzhichuangshi.mengliao"
+-        minSdkVersion 15
+-        targetSdkVersion 24
+-        versionCode 1
+-        versionName "1.0"
+-        multiDexEnabled true
+-        ndk {
+-            abiFilters "armeabi", "armeabi-v7a", "x86", "mips","x86_64","arm64-v8a"
+-        }
+-    }
+-    compileOptions {
+-        sourceCompatibility JavaVersion.VERSION_1_7
+-        targetCompatibility JavaVersion.VERSION_1_7
+-    }
+-    buildTypes {
+-        release {
+-            minifyEnabled false
+-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+-        }
+-    }
+-    dexOptions {
+-        javaMaxHeapSize "4g"
+-    }
+-    sourceSets {
+-        main {
+-            jniLibs.srcDirs = ['libs', "bizlibs"]
+-        }
+-    }
+-}
+-dependencies {
+-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+-   //mina
+-    implementation files('libs/mina-core-2.0.14.jar')
+-        exclude group: 'com.android.support', module: 'support-annotations'
+-    })
+-        compile('com.github.tony19:logback-android-classic:1.1.1-5') {
+-        // workaround issue #73
+-        exclude group: 'com.google.android', module: 'android'
+-    }
+-
+-    //huajiao
+-    compile files('libs/qhfaceapi.jar')
+-
+-    // agora-sdk
+-    implementation files('libs/agora-rtc-sdk.jar')
+-    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
+-    testImplementation 'junit:junit:4.12'
+-    implementation project(':aichangsdk')
+-    implementation project(':timsdk')
+-    implementation project(':libvideoprp')
+-    
+-    implementation 'jp.wasabeef:picasso-transformations:2.1.0'
+-    implementation 'com.squareup.picasso:picasso:2.5.2'
+-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+-    implementation 'com.zhy:okhttputils:2.6.2'
+-    implementation 'org.slf4j:slf4j-api:1.7.21'
+-    implementation 'com.github.tony19:logback-android-core:1.1.1-5'
+-    implementation 'org.greenrobot:greendao:3.0.1'
+-    implementation 'org.greenrobot:greendao-generator:3.0.0'
+-    implementation 'org.greenrobot:eventbus:3.0.0'
+-    implementation 'com.umeng.analytics:analytics:latest.integration'
+-    implementation 'com.orhanobut:logger:2.1.1'
+-    implementation 'com.facebook.stetho:stetho:1.5.0'
+-    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+-    implementation 'com.google.code.gson:gson:2.8.1'
+-
+-    //7.22.2.1
+-    implementation 'com.android.support:appcompat-v7:25.3.1'
+-    implementation 'com.android.support:design:25.3.1'
+-    implementation 'com.android.support:recyclerview-v7:25.3.1'
+-    implementation 'com.malinskiy:superrecyclerview:1.1.4'
+-
+-}
